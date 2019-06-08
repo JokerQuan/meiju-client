@@ -1,0 +1,72 @@
+.cards-container {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1688px;
+    margin-top: 60px;
+}
+
+.col {
+    max-width: 1500px;
+    margin-bottom: 60px;
+    transition: all 600ms;
+}
+
+.card {
+    cursor : pointer;
+    background-size: 100% 100%;
+}
+
+.shadow-out {
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card-shadow {
+    box-shadow: 25px -50px 60px 15px rgba(0, 0, 0, 0.5) inset;
+    transition: all 1s;
+}
+
+.card-shadow:hover {
+    box-shadow: 50px -100px 60px 30px rgba(0, 0, 0, 0.5) inset;
+    transition: box-shadow 1s;
+}
+
+.empty {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin:0 auto;
+    background-image: url(../../assets/breaking_bad.jpg);
+    opacity:0;
+}
+
+.empty::after {
+    content: "";
+    display: block;
+    padding:45%;
+}
+
+.content-box {
+    padding: 25px 25px 10px 25px;
+}
+
+.categories {
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+    color: #2EBF8B;
+}
+
+.title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
+    margin-top: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+    color: #ffffff;
+}
+
+.modal {
+    padding: 0;
+}

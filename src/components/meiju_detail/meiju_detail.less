@@ -1,0 +1,52 @@
+.info-box {
+    position: relative;
+}
+
+img {
+    float: left;
+}
+
+.info {
+    float: left;
+    margin-left: 20px;
+}
+
+.detail-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: Microsoft YaHei;
+    color: #1DA57A;
+}
+
+.download-all {
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.download-box {
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+    max-height: 300px;
+    overflow: auto;
+}
+
+/*滚动条整体样式*/
+.download-box::-webkit-scrollbar {
+    width: 10px;
+    height: 1px;
+}
+/*滚动条滑块*/
+.download-box::-webkit-scrollbar-thumb {
+    border-radius: 3px; 
+    background: rgba(29, 165, 122, 1);
+}
+/*滚动条轨道*/
+.download-box::-webkit-scrollbar-track {
+    border-radius: 3px; 
+    background: rgba(67, 187, 149, 0.3);
+}
