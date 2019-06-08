@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# production
-/build
+# production 服务器太渣，编译不了，本地编译，服务器直接pull
+#/build
 
 # misc
 .DS_Store
