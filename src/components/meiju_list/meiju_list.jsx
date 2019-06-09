@@ -18,8 +18,9 @@ class MeijuList extends Component {
             className : 'modal',
             okText : '关闭',
             content : <MeijuDetail meiju={meiju} />,
-            // width : 0.6 * window.innerWidth
-            width : '800px'
+            centered : true,
+            maskClosable : true,
+            width : 'auto'
         });
     }
 

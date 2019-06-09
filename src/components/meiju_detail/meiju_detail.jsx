@@ -33,19 +33,31 @@ class MeijuDetail extends Component {
                         <Paragraph>{'翻译：' + meiju.translator}</Paragraph>
                     </div>
                 </div>
-                <Paragraph className='download-all' 
-                    copyable={{ 
-                        text: meiju.files.map(file => file.url).join('\n'),
-                        onCopy: this.handleCopy
-                        }}>
-                    复制全部下载链接</Paragraph>
-                <div className='download-box'>
-                    {
-                        meiju.files.map((file) => (
-                            <Paragraph copyable={{text: file.url, onCopy: this.handleCopy}}>{file.name}</Paragraph>
-                        ))
-                    }
-                </div>
+                {
+                    meiju.files && meiju.files.length > 0 && meiju.files[0].name && meiju.files[0].url
+                    ? 
+                    <div>
+                        <Paragraph className='download-all' 
+                            copyable={{ 
+                                text: meiju.files.map(file => file.url).join('\n'),
+                                onCopy: this.handleCopy
+                                }}>
+                            复制全部下载链接</Paragraph>
+                        <div className='download-box'>
+                            {
+                                meiju.files.map((file, index) => (
+                                    <Paragraph key={index} copyable={{text: file.url, onCopy: this.handleCopy}}>{file.name}</Paragraph>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    :
+                    <div>
+                        <Paragraph>{'暂无下载链接，请前往源站查看:'}</Paragraph>
+                        <a href={'https://www.meijutt.com' + meiju.href} rel='noopener noreferrer' target="_blank">{'美剧天堂'}</a>
+                    </div>
+                }
+                
             </div>
         );
     }
