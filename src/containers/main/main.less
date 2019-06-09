@@ -1,6 +1,6 @@
 .layout {
     background-color: #2A2A2A;
-    // background-color: #ffffff;
+    min-width: 390px;
 }
 
 .logo {
@@ -19,15 +19,77 @@
     font-family: Microsoft YaHei;
 }
 
-.menu {
-    margin-left: 30px;
+.menu-horizontal {
     float: left;
+    margin-left: 30px;
+}
+
+.menu-vertical {
+    position: absolute;
+    margin-left: 30px;
+    width: 115px;
+    z-index: 100;
+    top: 64px;
+    left: -30px;
+}
+
+.menu-icon {
+    cursor: pointer;
+    position: absolute;
+    width: 50px;
+    height: 64px;
+    padding: 19px 0 0 0;
+    font-size: 26px;
+    color: #1DA57A;
+    top: 0;
+    left: 0;
+}
+
+@media (min-width:1140px) {
+    .menu-horizontal {
+        display: block;
+    }
+
+    .menu-vertical,
+    .menu-icon {
+        display: none;
+    }
+}
+
+@media (max-width:1140px) {
+    .menu-horizontal {
+        display: none;
+    }
+
+    .menu-icon ~ .menu-vertical {
+        display: none;
+    }
+
+    .menu-icon:hover ~ .menu-vertical {
+        display: block;
+    }
+
+    .menu-vertical:hover{
+        display: block;
+    }
+}
+
+@media (max-width:700px) {
+    .slogen {
+        display: none;
+    }
 }
 
 .search {
     max-width: 300px;
     float: right;
     margin: 12px;
+}
+
+@media (max-width:520px) {
+    .search {
+        max-width: 200px;
+    }
 }
 
 .content {
@@ -69,4 +131,8 @@
 /*滚动条轨道*/
 .ant-menu-sub::-webkit-scrollbar-track {
     background: rgba(0,0,0,0);
+}
+
+.ant-layout-footer {
+    padding: 15px;
 }

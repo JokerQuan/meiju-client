@@ -9,13 +9,14 @@ import Recommend from '../../containers/recommend/recommend';
 import Category from "../../containers/category/category";
 import Search from '../../containers/search/search'
 
+import MenuBar from "../../components/menu_bar/menu_bar";
+
 import { getCategory } from "../../redux/actions";
 
 import './main.less';
 import '../../common/common.less';
-import { Layout, Menu, BackTop, Input, Divider } from 'antd';
+import { Layout, BackTop, Input, Divider, Icon } from 'antd';
 const { Header, Content, Footer } = Layout;
-const {SubMenu} = Menu;
 const history = createBrowserHistory();
 
 let subTitle = '';
@@ -51,10 +52,10 @@ class Main extends Component {
 
     componentDidMount () {
         this.props.getCategory();
-        const minHeight = window.innerHeight - 64 - 69;
+        const minHeight = window.innerHeight - 64 - 72;
         document.getElementById('content_id').style.cssText=`min-height: ${minHeight}px;`;
         window.onresize = function(){
-            const minHeight = window.innerHeight - 64 - 69;
+            const minHeight = window.innerHeight - 64 - 72;
             document.getElementById('content_id').style.cssText=`min-height: ${minHeight}px;`;
         }
     }
@@ -103,50 +104,15 @@ class Main extends Component {
                     <Link className="logo" to='/'>
                     </Link>
                     <p className='slogen'>美剧一键下载</p>
-                    <Menu
-                    className='menu'
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={[defaultSelectedMenu]}
-                    style={{ lineHeight: '64px' }}
-                    >
-                        <Menu.Item key="home">
-                            <Link to='/'>首页</Link>
-                        </Menu.Item>
-                        <Menu.Item key="recommend">
-                            <Link to='/recommend'>推荐</Link>
-                        </Menu.Item>
-                        <SubMenu title='分类'>
-                            {
-                                category.types.map((type, index) => (
-                                    <Menu.Item key={'type-'+index}>
-                                        <Link to={'/category/type/' + index}>{type}</Link>
-                                    </Menu.Item>
-                                ))
-                            }
-                        </SubMenu>
-                        <SubMenu title='地区'>
-                            {
-                                category.areas.map((area, index) => (
-                                    <Menu.Item key={'area-'+index}>
-                                        <Link to={'/category/area/' + index}>{area}</Link>
-                                    </Menu.Item>
-                                ))
-                            }
-                        </SubMenu>
-                        <SubMenu title='标签' className='menu-box'>
-                            {
-                                category.tags.map((tag, index) => (
-                                    <Menu.Item key={'tags-'+index}>
-                                        <Link to={'/category/tags/' + index}>{tag}</Link>
-                                    </Menu.Item>
-                                ))
-                            }
-                        </SubMenu>
-                    </Menu>
-
+                    <div className='menu-horizontal'>
+                        <MenuBar menuMode='horizontal' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
+                    </div>
+                    <Icon className='menu-icon' type="menu" />
+                    <div className='menu-vertical'>
+                        <MenuBar menuMode='vertical' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
+                    </div>
                     <Input.Search className='search'
-                        placeholder="请输入中文名/英文名/别名"
+                        placeholder="中文/英文/别名"
                         enterButton
                         size="large"
                         onSearch={value => {
@@ -168,10 +134,10 @@ class Main extends Component {
                 </Content>
 
                 <Footer style={{ textAlign: 'center' }}>
-                    本站仅供学习使用！数据来源：
-                    <a href='https://www.meijutt.com' target="view_window">美剧天堂</a>
+                    本站仅供学习使用！<br/>
+                    数据来源：<a href='https://www.meijutt.com' rel='noopener noreferrer' target="_blank">美剧天堂</a>
                     &nbsp;&nbsp;&nbsp;
-                    设计参考：<a href='http://ddrk.me' target="view_window">低端影视</a>
+                    设计参考：<a href='http://ddrk.me' rel='noopener noreferrer' target="_blank">低端影视</a>
                 </Footer>
             </Layout>
             <BackTop className='back-to-top' />
