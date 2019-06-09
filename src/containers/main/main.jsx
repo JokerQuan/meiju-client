@@ -66,14 +66,19 @@ class Main extends Component {
         /**
          * 刷新时设置选中菜单
          */
-        let defaultSelectedMenu = 'home';
+        let defaultSelectedMenu = '';
         const keys = window.location.href.split('/');
-        if (keys[3]) {
-            if (keys[3] === 'recommend') {
-                defaultSelectedMenu = 'recommend';
-            } else {
-                defaultSelectedMenu = keys[4] + '-' + keys[5];
-            }
+        if (keys[3] === '') {
+            defaultSelectedMenu = 'home';
+        }
+        if (keys[3] === 'recommend') {
+            defaultSelectedMenu = 'recommend';
+        }
+        if (keys[3] === 'category') {
+            defaultSelectedMenu = keys[4] + '-' + keys[5];
+        }
+        if (keys[3] === 'search') {
+            defaultSelectedMenu = '';
         }
 
         /**
@@ -100,7 +105,7 @@ class Main extends Component {
         return (
             <Router history={history}>
             <Layout className='layout'>
-                <Header>
+                <Header className='header'>
                     <Link className="logo" to='/'>
                     </Link>
                     <p className='slogen'>美剧一键下载</p>
@@ -111,6 +116,7 @@ class Main extends Component {
                     <div className='menu-vertical'>
                         <MenuBar menuMode='vertical' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
                     </div>
+                    <Icon className='user-icon' type='user' />
                     <Input.Search className='search'
                         placeholder="中文/英文/别名"
                         enterButton

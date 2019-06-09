@@ -3,6 +3,10 @@
     min-width: 390px;
 }
 
+.header {
+    box-shadow: 0 6px 8px 5px rgba(0,0,0,0.5)
+}
+
 .logo {
     float: left;
     width: 64px;
@@ -89,6 +93,23 @@
 @media (max-width:520px) {
     .search {
         max-width: 200px;
+    }
+}
+
+.user-icon {
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+    padding: 19px 0 0 0;
+    color: #1DA57A;
+    float: right;
+}
+
+@media (max-width:1140px) {
+    .user-icon {
+        position: absolute;
+        right: 0;
     }
 }
 
