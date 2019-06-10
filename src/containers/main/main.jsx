@@ -10,12 +10,13 @@ import Category from "../../containers/category/category";
 import Search from '../../containers/search/search'
 
 import MenuBar from "../../components/menu_bar/menu_bar";
+import UserMenu from "../../components/user_menu/user_menu";
 
 import { getCategory } from "../../redux/actions";
 
 import './main.less';
 import '../../common/common.less';
-import { Layout, BackTop, Input, Divider, Icon } from 'antd';
+import { Layout, BackTop, Input, Divider, Icon, Avatar } from 'antd';
 const { Header, Content, Footer } = Layout;
 const history = createBrowserHistory();
 
@@ -116,7 +117,12 @@ class Main extends Component {
                     <div className='menu-vertical'>
                         <MenuBar menuMode='vertical' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
                     </div>
-                    <Icon className='user-icon' type='user' />
+                    <div className='avatar-box'>
+                        <Avatar className='avatar' icon='user' />
+                    </div>
+                    <div className='user-menu-box'>
+                        <UserMenu></UserMenu>
+                    </div>
                     <Input.Search className='search'
                         placeholder="中文/英文/别名"
                         enterButton

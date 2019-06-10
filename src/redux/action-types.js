@@ -8,3 +8,6 @@ export const RECEIVE_MEIJU_COUNT = "receive_meiju_count";
 export const ERROR = "error";
 
 export const IS_LOADING = "is_loading";
+
+export const RECEIVE_USER_EXIST = "receive_user_exist";
+export const USER_EXIST_LOADING = "user_exist_loading";

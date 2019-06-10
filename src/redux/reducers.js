@@ -8,7 +8,9 @@ import {
     RECEIVE_CATEGORY,
     RECEIVE_MEIJU_COUNT,
     ERROR,
-    IS_LOADING
+    IS_LOADING,
+    RECEIVE_USER_EXIST,
+    USER_EXIST_LOADING
 } from "./action-types";
 
 const initMeijuList = [];
@@ -61,9 +63,33 @@ function isLoading(state = initLoading, action) {
     }
 }
 
+const initUserExist = true;
+function userExist(state = initUserExist, action) {
+    switch (action.type) {
+        case RECEIVE_USER_EXIST:
+            return action.data;
+        case ERROR:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
+const initUserExistLoading = false;
+function userExistLoading(state = initUserExistLoading, action) {
+    switch (action.type) {
+        case USER_EXIST_LOADING:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     meijuList,
     category,
     meijuCount,
-    isLoading
+    isLoading,
+    userExist,
+    userExistLoading
 }); //向外暴露的结构：{meijuList:[], category:{}, count: 0}

@@ -96,20 +96,41 @@
     }
 }
 
-.user-icon {
+.avatar-box {
     cursor: pointer;
-    width: 64px;
-    height: 64px;
-    font-size: 26px;
-    padding: 19px 0 0 0;
-    color: #1DA57A;
     float: right;
 }
 
+.avatar {
+    background: #1DA57A;
+    color: #ffffff;
+    line-height: 30px;
+}
+
+.user-menu-box {
+    position: absolute;
+    display: none;
+    top: 64px;
+    right: 50px;
+    z-index: 100;
+}
+
+.avatar-box:hover ~ .user-menu-box {
+    display: block;
+}
+
+.user-menu-box:hover {
+    display: block;
+}
+
 @media (max-width:1140px) {
-    .user-icon {
+    .avatar-box {
         position: absolute;
-        right: 0;
+        right: 15px;
+    }
+
+    .user-menu-box {
+        right: 15px;
     }
 }
 
