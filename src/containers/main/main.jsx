@@ -12,7 +12,7 @@ import Search from '../../containers/search/search'
 import MenuBar from "../../components/menu_bar/menu_bar";
 import UserMenu from "../../components/user_menu/user_menu";
 
-import { getCategory } from "../../redux/actions";
+import { getCategory, getUserCookie } from "../../redux/actions";
 
 import './main.less';
 import '../../common/common.less';
@@ -59,6 +59,7 @@ class Main extends Component {
             const minHeight = window.innerHeight - 64 - 72;
             document.getElementById('content_id').style.cssText=`min-height: ${minHeight}px;`;
         }
+        this.props.getUserCookie();
     }
 
     render() {
@@ -103,6 +104,8 @@ class Main extends Component {
             }
         });
 
+        const isLogin = !!this.props.userCookie._id;
+
         return (
             <Router history={history}>
             <Layout className='layout'>
@@ -118,7 +121,11 @@ class Main extends Component {
                         <MenuBar menuMode='vertical' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
                     </div>
                     <div className='avatar-box'>
-                        <Avatar className='avatar' icon='user' />
+                        {
+                            isLogin
+                            ? <Avatar className='avatar' src={require(`../../assets/avatar/${isLogin ? this.props.userCookie.avatar : 1}.png`)} />
+                            : <Avatar className='avatar' icon='user' />
+                        }
                     </div>
                     <div className='user-menu-box'>
                         <UserMenu></UserMenu>
@@ -159,6 +166,9 @@ class Main extends Component {
 }
 
 export default connect(
-    state => ({category: state.category}),
-    {getCategory}
+    state => ({
+        category: state.category,
+        userCookie : state.userCookie
+    }),
+    {getCategory, getUserCookie}
 )(Main);

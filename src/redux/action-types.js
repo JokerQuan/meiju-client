@@ -11,3 +11,7 @@ export const IS_LOADING = "is_loading";
 
 export const RECEIVE_USER_EXIST = "receive_user_exist";
 export const USER_EXIST_LOADING = "user_exist_loading";
+
+export const LOGIN_SUCCESS = "login_success";
+
+export const GET_USER_COOKIE = "get_user_cookie";

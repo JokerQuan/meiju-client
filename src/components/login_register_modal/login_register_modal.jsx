@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Tabs, Input, Button, Icon, message, Tooltip} from 'antd';
+import { Tabs, Input, Button, Icon, message, Tooltip, Modal} from 'antd';
 import { connect } from "react-redux";
 
 import './login_register_modal.less'
 
-import { queryUserExist, register } from "../../redux/actions";
+import { queryUserExist, login, register } from "../../redux/actions";
 import validation from "../../utils/validation";
 
 const { TabPane } = Tabs;
@@ -23,11 +23,25 @@ class LoginRegisterModal extends Component {
 
     componentDidUpdate () {
         isInit = false;
+        if (this.props.loginSuccess) {
+            Modal.destroyAll();
+        }
+    }
+
+    handleLogin = () => {
+        const username = this.state.loginUsername;
+        const password = this.state.loginPassword;
+
+        this.props.login({
+            username,
+            password
+        });
     }
 
     handleRegister = () => {
         const username = this.state.registerUsername;
         const password = this.state.registerPssword;
+        const avatar = Math.floor(Math.random() * 6) + 1;
 
         let checkResult = validation.checkUsername(username);
         if (checkResult !== true) {
@@ -41,7 +55,8 @@ class LoginRegisterModal extends Component {
         }
         this.props.register({
             username,
-            password
+            password,
+            avatar
         });
     }
 
@@ -50,7 +65,6 @@ class LoginRegisterModal extends Component {
         this.setState({
             [type] : value
         });
-
         if (type !== 'registerUsername') return;
         if (timeoutId) {
             clearTimeout(timeoutId);
@@ -75,7 +89,7 @@ class LoginRegisterModal extends Component {
                     <Input.Password className='input password' placeholder="密码" allowClear 
                         onChange={e => {this.handleChange('loginPassword', e)}}
                     />
-                    <Button className='input button' type='primary'>{'登录'}</Button>
+                    <Button className='input button' type='primary' onClick={this.handleLogin}>{'登录'}</Button>
                 </TabPane>
 
                 <TabPane className='tab-pane' tab="注册" key="register">
@@ -104,7 +118,8 @@ class LoginRegisterModal extends Component {
 export default connect(
     state => ({
         userExist: state.userExist,
-        userExistLoading : state.userExistLoading
+        userExistLoading : state.userExistLoading,
+        loginSuccess : state.loginSuccess
     }),
-    {queryUserExist, register}
+    {queryUserExist, login, register}
 )(LoginRegisterModal);

@@ -10,7 +10,9 @@ import {
     ERROR,
     IS_LOADING,
     RECEIVE_USER_EXIST,
-    USER_EXIST_LOADING
+    USER_EXIST_LOADING,
+    LOGIN_SUCCESS,
+    GET_USER_COOKIE
 } from "./action-types";
 
 const initMeijuList = [];
@@ -85,11 +87,33 @@ function userExistLoading(state = initUserExistLoading, action) {
     }
 }
 
+const initLoginSuccess = false;
+function loginSuccess(state = initLoginSuccess, action) {
+    switch (action.type) {
+        case LOGIN_SUCCESS:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
+const initUserCookie = {};
+function userCookie(state = initUserCookie, action) {
+    switch (action.type) {
+        case GET_USER_COOKIE:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     meijuList,
     category,
     meijuCount,
     isLoading,
     userExist,
-    userExistLoading
+    userExistLoading,
+    loginSuccess,
+    userCookie
 }); //向外暴露的结构：{meijuList:[], category:{}, count: 0}
