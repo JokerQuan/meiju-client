@@ -32,6 +32,11 @@ class LoginRegisterModal extends Component {
         const username = this.state.loginUsername;
         const password = this.state.loginPassword;
 
+        if (username === '' || password === '') {
+            message.error('用户名和密码不能为空！');
+            return;
+        }
+
         this.props.login({
             username,
             password
@@ -82,19 +87,22 @@ class LoginRegisterModal extends Component {
         return (
             <Tabs className='tabs'>
                 <TabPane className='tab-pane' tab="登录" key="login">
-                    <Input className='input' placeholder="用户名" allowClear 
+                    <Input className='input' placeholder="用户名" allowClear autoFocus
                         onChange={e => {this.handleChange('loginUsername', e)}}
+                        onPressEnter={this.handleLogin}
                     />
                     <br/>
                     <Input.Password className='input password' placeholder="密码" allowClear 
                         onChange={e => {this.handleChange('loginPassword', e)}}
+                        onPressEnter={this.handleLogin}
                     />
                     <Button className='input button' type='primary' onClick={this.handleLogin}>{'登录'}</Button>
                 </TabPane>
 
                 <TabPane className='tab-pane' tab="注册" key="register">
-                    <Input className='input' placeholder="用户名：数字和字母，区分大小写！" allowClear 
+                    <Input className='input' placeholder="用户名：数字和字母，区分大小写！" allowClear autoFocus
                         onChange={e => {this.handleChange('registerUsername', e)}}
+                        onPressEnter={this.handleRegister}
                     />
                     <Icon style={{display : this.props.userExistLoading ? 'inline-block' : 'none'}} 
                         className='icon' type="loading" />
@@ -105,8 +113,9 @@ class LoginRegisterModal extends Component {
                         className='icon error' type="close-circle" />
                     </Tooltip>
                     <br/>
-                    <Input.Password className='input password' placeholder="密码：5~16位，不能包含空格！" allowClear
+                    <Input.Password className='input password' placeholder="密码：6~16位，不能包含空格！" allowClear
                         onChange={e => {this.handleChange('registerPssword', e)}}
+                        onPressEnter={this.handleRegister}
                     />
                     <Button className='input button' type='primary' onClick={this.handleRegister}>{'注册'}</Button>
                 </TabPane>
