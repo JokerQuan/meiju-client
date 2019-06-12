@@ -13,13 +13,14 @@ class UserMenu extends Component {
 
     handleMenuClick = ({key}) => {
         if (key === 'login') {
-            const modal = Modal.info({
+            const modal = Modal.info();
+            modal.update({
                 icon : null,
                 okText : '暂不登录',
                 okType : 'default',
                 onOk : () => modal.destroy(),
                 autoFocusButton : null,
-                content : <LoginRegisterModal store={store}/>,
+                content : <LoginRegisterModal modal={modal} store={store}/>,
                 centered : true,
                 footer : null,
                 width : '400px'
@@ -48,6 +49,9 @@ class UserMenu extends Component {
                 onClick={this.handleMenuClick}>
                 <Menu.Item key='login' style={{display: isLogin ? 'none' : 'block'}}>
                     {'登录/注册'}
+                </Menu.Item>
+                <Menu.Item key='star' style={{display: isLogin ? 'block' : 'none'}}>
+                    <Link to='/star'>{'我的收藏'}</Link>
                 </Menu.Item>
                 <Menu.Item key='about'>
                     <Link to='/about'>{'关于本站'}</Link>

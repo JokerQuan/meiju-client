@@ -1,4 +1,31 @@
-const cookie = {};
+let cookie = {};
+
+cookie.getCookieByName = (name) => {
+    let value = '';
+    if (!name || !document.cookie) return '';
+    const KVs = document.cookie.split(';');
+    /**
+    foreach不能使用常规方法跳出循环，坑。。可以用every或some
+    KVs.forEach(kv => {
+        if (name === kv.trim().split('=')[0]) {
+            return kv.trim().split('=')[1];
+        }
+    });
+     */
+    for (let i = 0; i < KVs.length; i++) {
+        const kv = KVs[i].trim().split('=');
+        if (name === kv[0]) {
+            value = kv[1];
+            break;
+        }
+    }
+    return value;
+}
+
+cookie.setCookieByName = (name, value) => {
+    const expires = 'expires=' + cookie.getCookieByName('userExpires') + ';';
+    document.cookie = name+ '=' + value + ';' + expires + 'path=/';
+}
 
 cookie.setCookies = (obj, expiresdays = 7) => {
     //key=value
@@ -14,6 +41,9 @@ cookie.setCookies = (obj, expiresdays = 7) => {
         kvStr = key + '=' + obj[key] + ';'
         document.cookie = kvStr + expires + 'path=/';
     });
+
+    //记录过期时间，方便获取
+    document.cookie = 'userExpires=' + d.toUTCString() + ';' + expires + 'path=/';
 }
 
 cookie.parseToObj = () => {

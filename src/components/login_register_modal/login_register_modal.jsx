@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, Input, Button, Icon, message, Tooltip, Modal} from 'antd';
+import { Tabs, Input, Button, Icon, message, Tooltip} from 'antd';
 import { connect } from "react-redux";
 
 import './login_register_modal.less'
@@ -24,7 +24,7 @@ class LoginRegisterModal extends Component {
     componentDidUpdate () {
         isInit = false;
         if (this.props.loginSuccess) {
-            Modal.destroyAll();
+            this.props.modal.destroy();
         }
     }
 

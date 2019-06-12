@@ -147,3 +147,37 @@ export const getUserCookie = () => {
         dispatch(get_user_cookie(cookieObj));
     }
 }
+
+export const star = (meijuId) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在收藏...', 0);
+        const response = await ajax.post('/api/star', {meijuId});
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            cookie.setCookieByName('favorates', result.data);
+            const cookieObj = cookie.parseToObj();
+            dispatch(get_user_cookie(cookieObj));
+            message.success('收藏成功！');
+        } else {
+            message.error(result.errMsg);
+        }
+    }
+}
+
+export const cancelStar = (meijuId) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在取消收藏...', 0);
+        const response = await ajax.post('/api/cancelStar', {meijuId});
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            cookie.setCookieByName('favorates', result.data);
+            const cookieObj = cookie.parseToObj();
+            dispatch(get_user_cookie(cookieObj));
+            message.success('取消收藏成功！');
+        } else {
+            message.error(result.errMsg);
+        }
+    }
+}

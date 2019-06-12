@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Row, Col, Modal } from "antd";
 
+import store from '../../redux/store'
+
 import './meiju_list.less';
 
 import MeijuDetail from "../meiju_detail/meiju_detail";
@@ -17,7 +19,7 @@ class MeijuList extends Component {
             icon : null,
             className : 'modal',
             okText : '关闭',
-            content : <MeijuDetail meiju={meiju} />,
+            content : <MeijuDetail meiju={meiju} store={store} />,
             centered : true,
             maskClosable : true,
             width : 'auto'
