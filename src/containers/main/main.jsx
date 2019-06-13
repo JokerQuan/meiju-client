@@ -7,7 +7,9 @@ import { createBrowserHistory } from "history";
 import Home from "../../containers/home/home";
 import Recommend from '../../containers/recommend/recommend';
 import Category from "../../containers/category/category";
-import Search from '../../containers/search/search'
+import Search from '../../containers/search/search';
+import MyFavorates from '../../containers/my-favorates/my-favorates';
+import About from '../../containers/about/about';
 
 import MenuBar from "../../components/menu_bar/menu_bar";
 import UserMenu from "../../components/user_menu/user_menu";
@@ -47,6 +49,14 @@ class Main extends Component {
 
         if (keys[0] === 'search') {
             _sunTitle = '搜索：' + decodeURI(keys[1]);
+        }
+
+        if (keys[0] === 'favorates') {
+            _sunTitle = '我的收藏';
+        }
+
+        if (keys[0] === 'about') {
+            _sunTitle = '关于本站';
         }
         return _sunTitle;
     }
@@ -147,6 +157,8 @@ class Main extends Component {
                         <Route path='/recommend' component={Recommend}/>
                         <Route path='/category/:prop/:type' component={Category}/>
                         <Route path='/search/:keyword' component={Search}/>
+                        <Route path='/favorates' component={MyFavorates}/>
+                        <Route path='/about' component={About}/>
                         <Route exact path='/' component={Home}/>
                         <Redirect path="*" to="/" />
                     </Switch>

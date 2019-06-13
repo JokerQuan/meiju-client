@@ -51,7 +51,7 @@ class UserMenu extends Component {
                     {'登录/注册'}
                 </Menu.Item>
                 <Menu.Item key='star' style={{display: isLogin ? 'block' : 'none'}}>
-                    <Link to='/star'>{'我的收藏'}</Link>
+                    <Link to='/favorates'>{'我的收藏'}</Link>
                 </Menu.Item>
                 <Menu.Item key='about'>
                     <Link to='/about'>{'关于本站'}</Link>
