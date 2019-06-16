@@ -15,3 +15,11 @@ export const USER_EXIST_LOADING = "user_exist_loading";
 export const LOGIN_SUCCESS = "login_success";
 
 export const GET_USER_COOKIE = "get_user_cookie";
+
+export const COMMENT_SUCCESS = "comment_success";
+export const RECEIVE_COMMENT_LIST = "receive_comment_list";
+export const RECEIVE_COMMENT_COUNT = "receive_comment_count";
+
+export const RECEIVE_AWESOME_RESULT = "receive_awesome_result";
+
+export const RECEIVE_CLIENT_IP = "receive_client_ip";

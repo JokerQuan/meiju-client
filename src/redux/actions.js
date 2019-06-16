@@ -16,7 +16,12 @@ import {
     RECEIVE_USER_EXIST,
     USER_EXIST_LOADING,
     LOGIN_SUCCESS,
-    GET_USER_COOKIE
+    GET_USER_COOKIE,
+    COMMENT_SUCCESS,
+    RECEIVE_COMMENT_LIST,
+    RECEIVE_COMMENT_COUNT,
+    RECEIVE_AWESOME_RESULT,
+    RECEIVE_CLIENT_IP
 } from "./action-types";
 
 const receive_meiju_list = (meijuList) => ({type: RECEIVE_MEIJU_LIST, data: meijuList});
@@ -30,6 +35,13 @@ const user_exist_loading = (userExistLoading) => ({type: USER_EXIST_LOADING, dat
 
 const login_success = (isLogin) => ({type: LOGIN_SUCCESS, data: isLogin});
 const get_user_cookie = (cookieObj) => ({type: GET_USER_COOKIE, data: cookieObj});
+
+const comment_success = (comment) => ({type: COMMENT_SUCCESS, data: comment})
+const receive_comment_list = (commentList) => ({type: RECEIVE_COMMENT_LIST, data: commentList});
+const receive_comment_count = (commentCount) => ({type: RECEIVE_COMMENT_COUNT, data: commentCount});
+const receive_awesome_result = (changedComment) => ({type: RECEIVE_AWESOME_RESULT, data: changedComment});
+
+const receive_client_ip = (ipInfo) => ({type: RECEIVE_CLIENT_IP, data: ipInfo});
 
 const error = (errMsg) => ({type: ERROR, data: errMsg});
 
@@ -178,6 +190,71 @@ export const cancelStar = (meijuId) => {
             message.success('取消收藏成功！');
         } else {
             message.error(result.errMsg);
+        }
+    }
+}
+
+export const comment = (content) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在评论...', 0);
+        const response = await ajax.post('/api/comment', {content});
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(comment_success(result.data));
+            message.success('评论成功！感谢您的建议！');
+        } else {
+            message.error(result.errMsg);
+        }
+    }
+}
+
+export const getCommentList = (page = 0) => {
+    return async dispatch => {
+        dispatch(is_loading(true));
+        const response = await ajax.get('/api/comment/' + page);
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(receive_comment_list(result.data));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+        dispatch(is_loading(false));
+    }
+}
+
+export const getCommentCount = () => {
+    return async dispatch => {
+        const response = await ajax.get('/api/commentCount');
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(receive_comment_count(result.data.count));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const awesome = (commentId, clientIP) => {
+    return async dispatch => {
+        const response = await ajax.post('/api/awesome', {commentId, clientIP});
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(receive_awesome_result(result.data));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const getClientIP = () => {
+    return async dispatch => {
+        const response = await ajax.get('https://api.ttt.sh/ip/qqwry/');
+        const result = response.data;
+        if (result.code === 200) {
+            dispatch(receive_client_ip(result));
+        } else {
+            dispatch(error(result.errMsg));
         }
     }
 }

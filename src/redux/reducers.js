@@ -12,7 +12,12 @@ import {
     RECEIVE_USER_EXIST,
     USER_EXIST_LOADING,
     LOGIN_SUCCESS,
-    GET_USER_COOKIE
+    GET_USER_COOKIE,
+    COMMENT_SUCCESS,
+    RECEIVE_COMMENT_LIST,
+    RECEIVE_COMMENT_COUNT,
+    RECEIVE_AWESOME_RESULT,
+    RECEIVE_CLIENT_IP
 } from "./action-types";
 
 const initMeijuList = [];
@@ -107,6 +112,48 @@ function userCookie(state = initUserCookie, action) {
     }
 }
 
+
+const initCommentList = [];
+function commentList(state = initCommentList, action) {
+    switch (action.type) {
+        case COMMENT_SUCCESS:
+            return [action.data, ...state];
+        case RECEIVE_COMMENT_LIST:
+            return action.data;
+        case RECEIVE_AWESOME_RESULT:
+            return state.map(comment => {
+                if (comment._id === action.data._id) {
+                    comment.awesome = action.data.awesome;
+                }
+                return comment;
+            });
+        default:
+            return state;
+    }
+}
+
+const initCommentCount = 0;
+function commentCount(state = initCommentCount, action) {
+    switch (action.type) {
+        case RECEIVE_COMMENT_COUNT:
+            return action.data;
+        case ERROR:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
+const initClientIP = '127.0.0.1';
+function clientIP(state = initClientIP, action) {
+    switch (action.type) {
+        case RECEIVE_CLIENT_IP:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     meijuList,
     category,
@@ -115,5 +162,8 @@ export default combineReducers({
     userExist,
     userExistLoading,
     loginSuccess,
-    userCookie
+    userCookie,
+    commentList,
+    commentCount,
+    clientIP
 }); //向外暴露的结构：{meijuList:[], category:{}, count: 0}

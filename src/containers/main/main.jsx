@@ -61,13 +61,16 @@ class Main extends Component {
         return _sunTitle;
     }
 
+    setContentMinHeight = () => {
+        const minHeight = window.innerHeight - 64 - 51;
+        document.getElementById('content_id').style.cssText=`min-height: ${minHeight}px;`;
+    }
+
     componentDidMount () {
         this.props.getCategory();
-        const minHeight = window.innerHeight - 64 - 72;
-        document.getElementById('content_id').style.cssText=`min-height: ${minHeight}px;`;
-        window.onresize = function(){
-            const minHeight = window.innerHeight - 64 - 72;
-            document.getElementById('content_id').style.cssText=`min-height: ${minHeight}px;`;
+        this.setContentMinHeight();
+        window.onresize = () => {
+            this.setContentMinHeight();
         }
         this.props.getUserCookie();
     }
@@ -152,7 +155,7 @@ class Main extends Component {
 
                 <Content id='content_id' className='content'>
                     <h1 id='h1_id' className='sub-title' style={{display: subTitle? 'block': 'none'}}>{subTitle}</h1>
-                    <Divider id='divider_id' className='divider' style={{display: subTitle? 'block': 'none'}} />
+                    <Divider id='divider_id' style={{display: subTitle? 'block': 'none'}} />
                     <Switch>
                         <Route path='/recommend' component={Recommend}/>
                         <Route path='/category/:prop/:type' component={Category}/>
@@ -165,10 +168,10 @@ class Main extends Component {
                 </Content>
 
                 <Footer style={{ textAlign: 'center' }}>
-                    本站仅供学习使用！<br/>
+                    本站仅供学习使用！
                     数据来源：<a href='https://www.meijutt.com' rel='noopener noreferrer' target="_blank">美剧天堂</a>
-                    &nbsp;&nbsp;&nbsp;
-                    设计参考：<a href='http://ddrk.me' rel='noopener noreferrer' target="_blank">低端影视</a>
+                    {/* &nbsp;&nbsp;&nbsp;
+                    设计参考：<a href='http://ddrk.me' rel='noopener noreferrer' target="_blank">低端影视</a> */}
                 </Footer>
             </Layout>
             <BackTop className='back-to-top' />
