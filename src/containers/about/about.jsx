@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Typography, Divider, Input, Button, message } from 'antd';
+import { Typography, Divider, Input, Button, message, Pagination } from 'antd';
 
 import { connect } from "react-redux";
 import { comment, getCommentList, getCommentCount } from "../../redux/actions";
@@ -38,6 +38,11 @@ class About extends Component {
         }
     }
 
+    onPageChange = (page) => {
+        this.props.getCommentList(page - 1);
+        document.querySelector("#divider").scrollIntoView();
+    }
+
     render() {
         return (
             <div className='about-content'>
@@ -49,7 +54,7 @@ class About extends Component {
                     <h4>
                         如有侵权，请联系邮箱：jokeshuan@gmail.com
                     </h4>
-                    <ul>
+                    <ul className='url-box'>
                         项目源码链接如下，欢迎各位大佬交流：
                         <li>
                             <a href='https://github.com/JokerQuan/meiju-client' rel='noopener noreferrer' 
@@ -79,7 +84,7 @@ class About extends Component {
                         </li>
                     </ul>
                 </Typography>
-                <Divider></Divider>
+                <Divider id='divider'></Divider>
                 <Title level={2}>留言板</Title>
                 您对本站有任何意见或建议，请在下方留言，感谢！
                 <div className='comment-box'>
@@ -92,7 +97,14 @@ class About extends Component {
                 <Divider orientation="left">
                     <h4>目前有{this.props.commentCount}条留言</h4>
                 </Divider>
+                <div className='list-container'>
                 <CommentList commentList={this.props.commentList}></CommentList>
+                <Pagination className='pagination'
+                    total={this.props.commentCount} 
+                    pageSize={20} 
+                    onChange={this.onPageChange}
+                    hideOnSinglePage={true}/>
+                </div>
             </div>
         );
     }

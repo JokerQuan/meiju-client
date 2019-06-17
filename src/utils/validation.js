@@ -7,6 +7,12 @@ validation.checkUsername = (username) => {
     if (username.indexOf(' ') !== -1) {
         return '用户名不能包含空格！';
     }
+    if (username.length > 20 || username.length < 3) {
+        return '用户名长度为3~20个字符！';
+    }
+    if (!/^[a-zA-Z0-9]{3,20}$/.test(username)) {
+        return '用户名只能包含数字和字母！'
+    }
     return true;
 }
 

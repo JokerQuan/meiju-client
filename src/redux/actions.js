@@ -18,9 +18,11 @@ import {
     LOGIN_SUCCESS,
     GET_USER_COOKIE,
     COMMENT_SUCCESS,
+    DELETE_COMMENT_SUCCESS,
     RECEIVE_COMMENT_LIST,
     RECEIVE_COMMENT_COUNT,
     RECEIVE_AWESOME_RESULT,
+    REPLAY_SUCCESS,
     RECEIVE_CLIENT_IP
 } from "./action-types";
 
@@ -36,10 +38,13 @@ const user_exist_loading = (userExistLoading) => ({type: USER_EXIST_LOADING, dat
 const login_success = (isLogin) => ({type: LOGIN_SUCCESS, data: isLogin});
 const get_user_cookie = (cookieObj) => ({type: GET_USER_COOKIE, data: cookieObj});
 
-const comment_success = (comment) => ({type: COMMENT_SUCCESS, data: comment})
+const comment_success = (comment) => ({type: COMMENT_SUCCESS, data: comment});
+const delete_comment_success = (id) => ({type: DELETE_COMMENT_SUCCESS, data: id});
 const receive_comment_list = (commentList) => ({type: RECEIVE_COMMENT_LIST, data: commentList});
 const receive_comment_count = (commentCount) => ({type: RECEIVE_COMMENT_COUNT, data: commentCount});
 const receive_awesome_result = (changedComment) => ({type: RECEIVE_AWESOME_RESULT, data: changedComment});
+
+const replay_success = (changedComment) => ({type: REPLAY_SUCCESS, data: changedComment});
 
 const receive_client_ip = (ipInfo) => ({type: RECEIVE_CLIENT_IP, data: ipInfo});
 
@@ -209,6 +214,21 @@ export const comment = (content) => {
     }
 }
 
+export const deleteComment = (_id) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在删除...', 0);
+        const response = await ajax.post('/api/delComment', {_id});
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(delete_comment_success(result.data));
+            message.success('删除成功！');
+        } else {
+            message.error(result.errMsg);
+        }
+    }
+}
+
 export const getCommentList = (page = 0) => {
     return async dispatch => {
         dispatch(is_loading(true));
@@ -243,6 +263,21 @@ export const awesome = (commentId, clientIP) => {
             dispatch(receive_awesome_result(result.data));
         } else {
             dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const replay = (replayObj) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在回复...', 0);
+        const response = await ajax.post('/api/replay', replayObj);
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(replay_success(result.data));
+            message.success('回复成功！');
+        } else {
+            message.error(result.errMsg);
         }
     }
 }

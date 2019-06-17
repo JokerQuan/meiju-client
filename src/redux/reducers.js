@@ -14,9 +14,11 @@ import {
     LOGIN_SUCCESS,
     GET_USER_COOKIE,
     COMMENT_SUCCESS,
+    DELETE_COMMENT_SUCCESS,
     RECEIVE_COMMENT_LIST,
     RECEIVE_COMMENT_COUNT,
     RECEIVE_AWESOME_RESULT,
+    REPLAY_SUCCESS,
     RECEIVE_CLIENT_IP
 } from "./action-types";
 
@@ -127,6 +129,22 @@ function commentList(state = initCommentList, action) {
                 }
                 return comment;
             });
+        case DELETE_COMMENT_SUCCESS:
+            for (let i = 0; i < state.length; i++) {
+                if(state[i]._id === action.data) {
+                    state.splice(i, 1);
+                    break;
+                }
+            }
+            return [...state];
+        case REPLAY_SUCCESS:
+            for (let i = 0; i < state.length; i++) {
+                if(state[i]._id === action.data._id) {
+                    state.splice(i, 1, action.data);
+                    break;
+                }
+            }
+            return [...state];
         default:
             return state;
     }
