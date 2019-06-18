@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 美剧前端项目
+### 开发环境
+Node.js v10.16.0
+npm 6.9.0
+### 开发环境运行
+1. 依赖另外两个项目，请先运行
+ [美剧服务端项目](https://github.com/JokerQuan/meiju-server)
+ [美剧爬虫项目](https://github.com/JokerQuan/meiju_spider)
+2. 克隆到本地
+> git clone https://github.com/JokerQuan/meiju-client.git
+3. 安装依赖
+> npm i
+4. 启动项目
+> npm start
 
-## Available Scripts
+ 启动成功后会自动唤起浏览器。
+ *默认运行在80端口，可在package.json中配置*
+ *服务端运行在本地的其他端口，需要配置反向代理，见package.json中的proxy字段。*
 
-In the project directory, you can run:
+### 生产环境运行
+1. 依赖另外两个项目，请先运行
+ [美剧服务端项目](https://github.com/JokerQuan/meiju-server)
+ [美剧爬虫项目](https://github.com/JokerQuan/meiju_spider)
+2. 克隆到本地或服务器，安装依赖（同开发环境）
+3. 本地编译打包（也可以直接在服务器编译）
+> npm run build
 
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ 把打包好的 build 文件夹放到服务器上（我使用的是 nginx，配置反向代理方便）。
+4. 在服务器上安装配置好 nginx，启动 nginx
+ 基本配置项为 build 目录路径、监听域名及端口、反向代理端口（即服务端运行端口）。
