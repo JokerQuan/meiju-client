@@ -48,7 +48,7 @@ React、Redux、Antd、Axios
 
     > npm run build
 
-    把打包好的 build 文件夹放到服务器上（我使用的是 nginx，配置反向代理方便）。
+    把打包好的 build 文件夹放到服务器上。
 
 4. 在服务器上安装配置好 nginx，启动 nginx
 
