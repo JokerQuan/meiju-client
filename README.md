@@ -4,6 +4,10 @@ Node.js v10.16.0
 
 npm 6.9.0
 
+### 主要框架
+
+React、Redux、Antd、Axios
+
 ### 开发环境运行
 
 1. 依赖另外两个项目，请先运行
