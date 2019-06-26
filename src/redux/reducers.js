@@ -7,6 +7,10 @@ import {
     RECEIVE_MEIJU_LIST,
     RECEIVE_CATEGORY,
     RECEIVE_MEIJU_COUNT,
+    COMMENT_MEIJU_SUCCESS,
+    COMMENT_MEIJU_DELETE_SUCCESS,
+    RECEIVE_MEIJU_AWESOME_RESULT,
+    RECEIVE_MEIJU_REPLAY_RESULT,
     ERROR,
     IS_LOADING,
     RECEIVE_USER_EXIST,
@@ -27,6 +31,22 @@ function meijuList(state = initMeijuList, action) {
     switch (action.type) {
         case RECEIVE_MEIJU_LIST:
             return action.data;
+        case COMMENT_MEIJU_SUCCESS:
+            return state.map((meiju) => {
+                return meiju._id === action.data._id ? action.data : meiju;
+            });
+        case COMMENT_MEIJU_DELETE_SUCCESS:
+            return state.map((meiju) => {
+                return meiju._id === action.data._id ? action.data : meiju;
+            });
+        case RECEIVE_MEIJU_AWESOME_RESULT:
+            return state.map((meiju) => {
+                return meiju._id === action.data._id ? action.data : meiju;
+            });
+        case RECEIVE_MEIJU_REPLAY_RESULT:
+            return state.map((meiju) => {
+                return meiju._id === action.data._id ? action.data : meiju;
+            });
         case ERROR:
             return action.data;
         default:

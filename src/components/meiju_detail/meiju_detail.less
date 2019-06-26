@@ -44,31 +44,45 @@
 }
 
 .download-all {
-    float: left;
-    margin-top: 20px;
     width: 100%;
 }
 
-.download-box {
-    float: left;
-    margin-top: 10px;
+.download-box,
+.comments-box  {
     width: 100%;
     max-height: 300px;
     overflow: auto;
 }
 
-/*滚动条整体样式*/
-.download-box::-webkit-scrollbar {
-    width: 10px;
-    height: 1px;
+.comments-box  {
+    margin-top: 10px;
 }
-/*滚动条滑块*/
-.download-box::-webkit-scrollbar-thumb {
-    border-radius: 3px; 
-    background: rgba(29, 165, 122, 1);
+
+.comments-box textarea.ant-input {
+    max-width: 80%;
 }
-/*滚动条轨道*/
-.download-box::-webkit-scrollbar-track {
-    border-radius: 3px; 
-    background: rgba(67, 187, 149, 0.3);
+
+.replay-box textarea.ant-input {
+    max-width: 70%;
+}
+
+@media (max-width: 600px) {
+    .comments-box textarea.ant-input {
+        max-width: 60%;
+    }
+
+    .replay-box textarea.ant-input {
+        max-width: 60%;
+    }
+}
+
+.comments-box button {
+    float: right;
+}
+
+.tabs {
+    float: left;
+    max-width: 800px;
+    width: 100%;
+    height: auto;
 }

@@ -15,8 +15,7 @@ import { connect } from "react-redux";
 
 import ReplayList from '../replay_list/replay_list';
 import { 
-    awesome, 
-    getClientIP, 
+    awesome,
     deleteComment, 
     getCommentCount, 
     replay 
@@ -35,10 +34,6 @@ class CommentList extends Component {
 
     static propTypes = {
         commentList : PropTypes.array
-    }
-
-    componentDidMount () {
-        this.props.getClientIP();
     }
 
     handleAwesome = (commentId) => {
@@ -202,5 +197,5 @@ export default connect(
         clientIP : state.clientIP,
         userCookie : state.userCookie
     }),
-    {awesome, getClientIP, deleteComment, getCommentCount, replay}
+    {awesome, deleteComment, getCommentCount, replay}
 )(CommentList);

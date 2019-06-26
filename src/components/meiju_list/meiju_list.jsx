@@ -37,7 +37,13 @@ class MeijuList extends Component {
                                     key={meiju._id} xs={24} sm={24} md={12} lg={12} xl={8} xxl={6}>
                                 <div className='shadow-out'>
                                     <div className='card card-shadow' onClick={this.detailsDialog.bind(this, meiju)}
-                                        style={{backgroundImage: `url(${meiju.pic_url})`}}
+                                        style={{backgroundImage: `url(${
+                                            meiju.pic_url === '/pic/nopic.gif'
+                                            ?
+                                            require(`../../assets/nopic.gif`)
+                                            :
+                                            meiju.pic_url
+                                        })`}}
                                         >
                                         <div className='empty'></div>
                                         <div className='content-box'>

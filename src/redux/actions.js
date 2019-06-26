@@ -11,6 +11,10 @@ import {
     RECEIVE_MEIJU_LIST,
     RECEIVE_CATEGORY,
     RECEIVE_MEIJU_COUNT,
+    COMMENT_MEIJU_SUCCESS,
+    COMMENT_MEIJU_DELETE_SUCCESS,
+    RECEIVE_MEIJU_AWESOME_RESULT,
+    RECEIVE_MEIJU_REPLAY_RESULT,
     ERROR,
     IS_LOADING,
     RECEIVE_USER_EXIST,
@@ -29,6 +33,11 @@ import {
 const receive_meiju_list = (meijuList) => ({type: RECEIVE_MEIJU_LIST, data: meijuList});
 const receive_category = (category) => ({type: RECEIVE_CATEGORY, data: category});
 const receive_meiju_count = (meijuCount) => ({type: RECEIVE_MEIJU_COUNT, data: meijuCount});
+
+const comment_meiju_success = (meiju) => ({type: COMMENT_MEIJU_SUCCESS, data: meiju});
+const comment_meiju_delete_success = (meiju) => ({type: COMMENT_MEIJU_DELETE_SUCCESS, data: meiju});
+const receive_meiju_awesome_result = (meiju) => ({type:RECEIVE_MEIJU_AWESOME_RESULT, data: meiju});
+const receive_meiju_replay_result = (meiju) => ({type:RECEIVE_MEIJU_REPLAY_RESULT, data: meiju});
 
 const is_loading = (idLoading) => ({type: IS_LOADING, data: idLoading});
 
@@ -88,6 +97,62 @@ export const getMeijuCount = (url) => {
     }
 }
 
+export const meijuComment = (obj) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在评论...', 0);
+        const response = await ajax.post('/api/meiju/comment', obj);
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            message.success('评论成功！')
+            dispatch(comment_meiju_success(result.data));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const deleteMeijuComment = (obj) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在删除...', 0);
+        const response = await ajax.post('/api/meiju/delComment', obj);
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            message.success('删除成功！')
+            dispatch(comment_meiju_delete_success(result.data));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const meijuAwesome = (obj) => {
+    return async dispatch => {
+        const response = await ajax.post('/api/meiju/awesome', obj);
+        const result = response.data;
+        if (result.code === 0) {
+            dispatch(receive_meiju_awesome_result(result.data));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const meijuReplay = (obj) => {
+    return async dispatch => {
+        const closeMsg = message.loading('正在回复...', 0);
+        const response = await ajax.post('/api/meiju/replay', obj);
+        closeMsg();
+        const result = response.data;
+        if (result.code === 0) {
+            message.success('回复成功！')
+            dispatch(receive_meiju_replay_result(result.data));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
 
 export const queryUserExist = (username) => {
     return async dispatch => {

@@ -14,7 +14,7 @@ import About from '../../containers/about/about';
 import MenuBar from "../../components/menu_bar/menu_bar";
 import UserMenu from "../../components/user_menu/user_menu";
 
-import { getCategory, getUserCookie } from "../../redux/actions";
+import { getCategory, getUserCookie, getClientIP } from "../../redux/actions";
 
 import './main.less';
 import '../../common/common.less';
@@ -73,6 +73,7 @@ class Main extends Component {
             this.setContentMinHeight();
         }
         this.props.getUserCookie();
+        this.props.getClientIP();
     }
 
     render() {
@@ -185,5 +186,5 @@ export default connect(
         category: state.category,
         userCookie : state.userCookie
     }),
-    {getCategory, getUserCookie}
+    {getCategory, getUserCookie, getClientIP}
 )(Main);
