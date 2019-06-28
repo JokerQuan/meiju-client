@@ -30,23 +30,17 @@
 
 .menu-vertical {
     position: absolute;
-    margin-left: 30px;
-    width: 115px;
-    z-index: 100;
-    top: 64px;
-    left: -30px;
+    left : 0;
+    width: 50px;
+    height: 64px;
 }
 
 .menu-icon {
-    cursor: pointer;
     position: absolute;
-    width: 50px;
-    height: 64px;
-    padding: 19px 0 0 0;
-    font-size: 26px;
+    top : -40px;
+    left : 12px;
+    font-size: 24px !important;
     color: #1DA57A;
-    top: 0;
-    left: 0;
 }
 
 @media (min-width:1140px) {
@@ -54,8 +48,7 @@
         display: block;
     }
 
-    .menu-vertical,
-    .menu-icon {
+    .menu-vertical{
         display: none;
     }
 }
@@ -63,18 +56,6 @@
 @media (max-width:1140px) {
     .menu-horizontal {
         display: none;
-    }
-
-    .menu-icon ~ .menu-vertical {
-        display: none;
-    }
-
-    .menu-icon:hover ~ .menu-vertical {
-        display: block;
-    }
-
-    .menu-vertical:hover{
-        display: block;
     }
 }
 
@@ -87,7 +68,7 @@
 .search {
     max-width: 300px;
     float: right;
-    margin: 12px;
+    margin: 12px 60px 0 0;
 }
 
 @media (max-width:520px) {
@@ -96,41 +77,29 @@
     }
 }
 
-.avatar-box {
-    cursor: pointer;
-    float: right;
-}
-
 .avatar {
     background: #1DA57A;
     color: #ffffff;
     line-height: 30px;
 }
 
+.avatar .anticon {
+    margin: 0;
+}
+
 .user-menu-box {
     position: absolute;
-    display: none;
-    top: 64px;
-    right: 50px;
+    right: 35px;
     z-index: 100;
 }
 
-.avatar-box:hover ~ .user-menu-box {
-    display: block;
-}
-
-.user-menu-box:hover {
-    display: block;
-}
-
 @media (max-width:1140px) {
-    .avatar-box {
-        position: absolute;
-        right: 15px;
+    .search {
+        margin: 12px 25px 0 0;
     }
 
     .user-menu-box {
-        right: 15px;
+        right: 0px;
     }
 }
 

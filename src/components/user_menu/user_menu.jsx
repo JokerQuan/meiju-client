@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Menu, Modal } from "antd";
+import { Menu, Modal, Avatar } from "antd";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import store from '../../redux/store'
 
@@ -10,6 +11,10 @@ import { signOut } from "../../redux/actions";
 import './user_menu.less'
 
 class UserMenu extends Component {
+
+    static propTypes = {
+        defaultSelectedMenu : PropTypes.array.isRequired
+    }
 
     handleMenuClick = ({key}) => {
         if (key === 'login') {
@@ -45,20 +50,29 @@ class UserMenu extends Component {
         return (
             <Menu className='user-menu'
                 theme='dark'
-                mode='vertical'
+                mode='horizontal'
+                defaultSelectedKeys={this.props.defaultSelectedMenu}
                 onClick={this.handleMenuClick}>
-                <Menu.Item key='login' style={{display: isLogin ? 'none' : 'block'}}>
-                    {'登录/注册'}
-                </Menu.Item>
-                <Menu.Item key='star' style={{display: isLogin ? 'block' : 'none'}}>
-                    <Link to='/favorates'>{'我的收藏'}</Link>
-                </Menu.Item>
-                <Menu.Item key='about'>
-                    <Link to='/about'>{'关于本站'}</Link>
-                </Menu.Item>
-                <Menu.Item key='sign-out' style={{display: isLogin ? 'block' : 'none'}}>
-                    {'退出登录'}
-                </Menu.Item>
+                <Menu.SubMenu
+                    title={
+                        isLogin
+                        ? <Avatar className='avatar' src={require(`../../assets/avatar/${isLogin ? this.props.userCookie.avatar : 1}.png`)} />
+                        : <Avatar className='avatar' icon='user' />
+                    }
+                    >
+                    <Menu.Item key='login' style={{display: isLogin ? 'none' : 'block'}}>
+                        {'登录/注册'}
+                    </Menu.Item>
+                    <Menu.Item key='star' style={{display: isLogin ? 'block' : 'none'}}>
+                        <Link to='/favorates'>{'我的收藏'}</Link>
+                    </Menu.Item>
+                    <Menu.Item key='about'>
+                        <Link to='/about'>{'关于本站'}</Link>
+                    </Menu.Item>
+                    <Menu.Item key='sign-out' style={{display: isLogin ? 'block' : 'none'}}>
+                        {'退出登录'}
+                    </Menu.Item>
+                </Menu.SubMenu>
             </Menu>
         );
     }

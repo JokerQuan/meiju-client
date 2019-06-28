@@ -18,7 +18,7 @@ import { getCategory, getUserCookie, getClientIP } from "../../redux/actions";
 
 import './main.less';
 import '../../common/common.less';
-import { Layout, BackTop, Input, Divider, Icon, Avatar } from 'antd';
+import { Layout, BackTop, Input, Divider } from 'antd';
 const { Header, Content, Footer } = Layout;
 const history = createBrowserHistory();
 
@@ -85,16 +85,22 @@ class Main extends Component {
         let defaultSelectedMenu = '';
         const keys = window.location.href.split('/');
         if (keys[3] === '') {
-            defaultSelectedMenu = 'home';
+            defaultSelectedMenu = ['home'];
         }
         if (keys[3] === 'recommend') {
-            defaultSelectedMenu = 'recommend';
+            defaultSelectedMenu = ['recommend'];
         }
         if (keys[3] === 'category') {
-            defaultSelectedMenu = keys[4] + '-' + keys[5];
+            defaultSelectedMenu = [keys[4], keys[4] + '-' + keys[5]];
         }
         if (keys[3] === 'search') {
-            defaultSelectedMenu = '';
+            defaultSelectedMenu = [''];
+        }
+        if (keys[3] === 'about') {
+            defaultSelectedMenu = ['about'];
+        }
+        if (keys[3] === 'favorates') {
+            defaultSelectedMenu = ['favorates'];
         }
 
         /**
@@ -118,7 +124,7 @@ class Main extends Component {
             }
         });
 
-        const isLogin = !!this.props.userCookie._id;
+        // const isLogin = !!this.props.userCookie._id;
 
         return (
             <Router history={history}>
@@ -130,19 +136,11 @@ class Main extends Component {
                     <div className='menu-horizontal'>
                         <MenuBar menuMode='horizontal' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
                     </div>
-                    <Icon className='menu-icon' type="menu" />
                     <div className='menu-vertical'>
                         <MenuBar menuMode='vertical' category={category} defaultSelectedMenu={defaultSelectedMenu}></MenuBar>
                     </div>
-                    <div className='avatar-box'>
-                        {
-                            isLogin
-                            ? <Avatar className='avatar' src={require(`../../assets/avatar/${isLogin ? this.props.userCookie.avatar : 1}.png`)} />
-                            : <Avatar className='avatar' icon='user' />
-                        }
-                    </div>
                     <div className='user-menu-box'>
-                        <UserMenu></UserMenu>
+                        <UserMenu defaultSelectedMenu={defaultSelectedMenu}></UserMenu>
                     </div>
                     <Input.Search className='search'
                         placeholder="中文/英文/别名"
