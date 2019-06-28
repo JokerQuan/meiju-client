@@ -7,7 +7,7 @@ import CommentList from '../../components/comment_list/comment_list';
 
 import './about.less';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 class About extends Component {
 
@@ -67,20 +67,6 @@ class About extends Component {
                         <li>
                             <a href='https://github.com/JokerQuan/meiju_spider' rel='noopener noreferrer' 
                                 target="_blank">爬虫源码</a>
-                        </li>
-                    </ul>
-                </Typography>
-                <Typography>
-                    <h4>开发计划：</h4>
-                    <ul>
-                        <li>
-                            <Text>关于本站可评论</Text>
-                        </li>
-                        <li>
-                            <Text>可对美剧进行评论</Text>
-                        </li>
-                        <li>
-                            <Text>重构导航菜单、用户菜单</Text>
                         </li>
                     </ul>
                 </Typography>
