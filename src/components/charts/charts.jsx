@@ -16,7 +16,7 @@ class Charts extends Component {
                     data={this.props.data} 
                     scale={this.props.scale}>
                 <Coord/>
-                <Axis name="genre" title/>
+                <Axis name="genre" title label={{textStyle:{fill:'#bbbbbb'}}}/>
                 <Axis name="sold" title/>
                 <Legend/>
                 <Tooltip showTitle='false'/>

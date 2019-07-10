@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row } from "antd";
+import { Col, Row, Spin, Icon } from "antd";
 import { connect } from "react-redux";
 
 import Charts from '../../components/charts/charts';
@@ -54,7 +54,14 @@ class DataStatistics extends Component {
                                 lg={charts.key==='tags'?24:12} 
                                 xl={charts.key==='tags'?24:12} 
                                 xxl={charts.key==='tags'?24:12}>
-                            <Charts {...charts}></Charts>
+                            {
+                                charts.data.length > 0
+                                ?
+                                <Charts {...charts}></Charts>
+                                :
+                                <Spin indicator={<Icon type="loading" style={{ fontSize: 34 }} spin />}
+                                    className='spin' size="large" />
+                            }
                         </Col>
                     ))
                 }
