@@ -66,6 +66,9 @@ class UserMenu extends Component {
                     <Menu.Item key='star' style={{display: isLogin ? 'block' : 'none'}}>
                         <Link to='/favorates'>{'我的收藏'}</Link>
                     </Menu.Item>
+                    <Menu.Item key='statistics'>
+                        <Link to='/statistics'>{'数据统计'}</Link>
+                    </Menu.Item>
                     <Menu.Item key='about'>
                         <Link to='/about'>{'关于本站'}</Link>
                     </Menu.Item>

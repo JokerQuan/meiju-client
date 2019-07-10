@@ -32,3 +32,7 @@ export const RECEIVE_AWESOME_RESULT = "receive_awesome_result";
 export const REPLAY_SUCCESS = "replay_success";
 
 export const RECEIVE_CLIENT_IP = "receive_client_ip";
+
+export const RECEIVE_TYPE_STATISTICS = "receive_type_statistics";
+export const RECEIVE_AREA_STATISTICS = "receive_area_statistics";
+export const RECEIVE_TAGS_STATISTICS = "receive_tags_statistics";

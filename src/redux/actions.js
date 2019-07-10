@@ -27,7 +27,10 @@ import {
     RECEIVE_COMMENT_COUNT,
     RECEIVE_AWESOME_RESULT,
     REPLAY_SUCCESS,
-    RECEIVE_CLIENT_IP
+    RECEIVE_CLIENT_IP,
+    RECEIVE_TYPE_STATISTICS,
+    RECEIVE_AREA_STATISTICS,
+    RECEIVE_TAGS_STATISTICS
 } from "./action-types";
 
 const receive_meiju_list = (meijuList) => ({type: RECEIVE_MEIJU_LIST, data: meijuList});
@@ -56,6 +59,10 @@ const receive_awesome_result = (changedComment) => ({type: RECEIVE_AWESOME_RESUL
 const replay_success = (changedComment) => ({type: REPLAY_SUCCESS, data: changedComment});
 
 const receive_client_ip = (ipInfo) => ({type: RECEIVE_CLIENT_IP, data: ipInfo});
+
+const receive_type_statistics = (typeData) => ({type:RECEIVE_TYPE_STATISTICS, data: typeData});
+const receive_area_statistics = (areaData) => ({type:RECEIVE_AREA_STATISTICS, data: areaData});
+const receive_tags_statistics = (tagsData) => ({type:RECEIVE_TAGS_STATISTICS, data: tagsData});
 
 const error = (errMsg) => ({type: ERROR, data: errMsg});
 
@@ -353,6 +360,31 @@ export const getClientIP = () => {
         const result = response.data;
         if (result.code === 200) {
             dispatch(receive_client_ip(result));
+        } else {
+            dispatch(error(result.errMsg));
+        }
+    }
+}
+
+export const getStatistics = (chartsType) => {
+    return async dispatch => {
+        const response = await ajax.get('/api/statistics/' + chartsType);
+        const result = response.data;
+        if (result.code === 0) {
+            switch(chartsType){
+                case 'type':
+                    dispatch(receive_type_statistics(result.data));
+                    break;
+                case 'area':
+                    dispatch(receive_area_statistics(result.data));
+                    break;
+                case 'tags':
+                    dispatch(receive_tags_statistics(result.data));
+                    break;
+                default :
+                    return;
+            }
+            
         } else {
             dispatch(error(result.errMsg));
         }

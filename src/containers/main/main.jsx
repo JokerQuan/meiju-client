@@ -9,6 +9,7 @@ import Recommend from '../../containers/recommend/recommend';
 import Category from "../../containers/category/category";
 import Search from '../../containers/search/search';
 import MyFavorates from '../../containers/my-favorates/my-favorates';
+import DataStatistics from '../../containers/data_statistics/data_statistics';
 import About from '../../containers/about/about';
 
 import MenuBar from "../../components/menu_bar/menu_bar";
@@ -58,6 +59,10 @@ class Main extends Component {
         if (keys[0] === 'about') {
             _sunTitle = '关于本站';
         }
+
+        if (keys[0] === 'statistics') {
+            _sunTitle = '数据统计';
+        }
         return _sunTitle;
     }
 
@@ -82,7 +87,7 @@ class Main extends Component {
         /**
          * 刷新时设置选中菜单
          */
-        let defaultSelectedMenu = '';
+        let defaultSelectedMenu = [];
         const keys = window.location.href.split('/');
         if (keys[3] === '') {
             defaultSelectedMenu = ['home'];
@@ -101,6 +106,9 @@ class Main extends Component {
         }
         if (keys[3] === 'favorates') {
             defaultSelectedMenu = ['favorates'];
+        }
+        if (keys[3] === 'statistics') {
+            defaultSelectedMenu = ['statistics'];
         }
 
         /**
@@ -160,6 +168,7 @@ class Main extends Component {
                         <Route path='/category/:prop/:type' component={Category}/>
                         <Route path='/search/:keyword' component={Search}/>
                         <Route path='/favorates' component={MyFavorates}/>
+                        <Route path='/statistics' component={DataStatistics}/>
                         <Route path='/about' component={About}/>
                         <Route exact path='/' component={Home}/>
                         <Redirect path="*" to="/" />
@@ -169,8 +178,6 @@ class Main extends Component {
                 <Footer style={{ textAlign: 'center' }}>
                     本站仅供学习使用！
                     数据来源：<a href='https://www.meijutt.com' rel='noopener noreferrer' target="_blank">美剧天堂</a>
-                    {/* &nbsp;&nbsp;&nbsp;
-                    设计参考：<a href='http://ddrk.me' rel='noopener noreferrer' target="_blank">低端影视</a> */}
                 </Footer>
             </Layout>
             <BackTop className='back-to-top' />

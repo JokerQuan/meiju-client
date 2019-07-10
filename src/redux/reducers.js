@@ -23,7 +23,10 @@ import {
     RECEIVE_COMMENT_COUNT,
     RECEIVE_AWESOME_RESULT,
     REPLAY_SUCCESS,
-    RECEIVE_CLIENT_IP
+    RECEIVE_CLIENT_IP,
+    RECEIVE_TYPE_STATISTICS,
+    RECEIVE_AREA_STATISTICS,
+    RECEIVE_TAGS_STATISTICS
 } from "./action-types";
 
 const initMeijuList = [];
@@ -192,6 +195,24 @@ function clientIP(state = initClientIP, action) {
     }
 }
 
+const initStatistics = {
+    typeData : [],
+    areaData : [],
+    tagsData : []
+};
+function statistics (state = initStatistics, action) {
+    switch (action.type) {
+        case RECEIVE_TYPE_STATISTICS:
+            return {...state, ...{typeData : action.data}};
+        case RECEIVE_AREA_STATISTICS:
+            return {...state, ...{areaData : action.data}};
+        case RECEIVE_TAGS_STATISTICS:
+            return {...state, ...{tagsData : action.data}};
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     meijuList,
     category,
@@ -203,5 +224,6 @@ export default combineReducers({
     userCookie,
     commentList,
     commentCount,
-    clientIP
+    clientIP,
+    statistics
 }); //向外暴露的结构：{meijuList:[], category:{}, count: 0}
