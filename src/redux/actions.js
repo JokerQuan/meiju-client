@@ -30,7 +30,8 @@ import {
     RECEIVE_CLIENT_IP,
     RECEIVE_TYPE_STATISTICS,
     RECEIVE_AREA_STATISTICS,
-    RECEIVE_TAGS_STATISTICS
+    RECEIVE_TAGS_STATISTICS,
+    SET_FILTER
 } from "./action-types";
 
 const receive_meiju_list = (meijuList) => ({type: RECEIVE_MEIJU_LIST, data: meijuList});
@@ -64,6 +65,8 @@ const receive_type_statistics = (typeData) => ({type:RECEIVE_TYPE_STATISTICS, da
 const receive_area_statistics = (areaData) => ({type:RECEIVE_AREA_STATISTICS, data: areaData});
 const receive_tags_statistics = (tagsData) => ({type:RECEIVE_TAGS_STATISTICS, data: tagsData});
 
+const set_filter = (filter) => ({type:SET_FILTER, data:filter});
+
 const error = (errMsg) => ({type: ERROR, data: errMsg});
 
 export const getMeijuList = (url, params) => {
@@ -92,9 +95,9 @@ export const getCategory = () => {
     }
 }
 
-export const getMeijuCount = (url) => {
+export const getMeijuCount = (url, params) => {
     return async dispatch => {
-        const response = await ajax.get(url);
+        const response = await ajax.get(url, params);
         const result = response.data;
         if (result.code === 0) {
             dispatch(receive_meiju_count(result.data.count));
@@ -388,5 +391,11 @@ export const getStatistics = (chartsType) => {
         } else {
             dispatch(error(result.errMsg));
         }
+    }
+}
+
+export const setFilter = (filter) => {
+    return dispatch => {
+        dispatch(set_filter(filter));
     }
 }

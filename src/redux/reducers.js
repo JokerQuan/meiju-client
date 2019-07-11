@@ -26,7 +26,8 @@ import {
     RECEIVE_CLIENT_IP,
     RECEIVE_TYPE_STATISTICS,
     RECEIVE_AREA_STATISTICS,
-    RECEIVE_TAGS_STATISTICS
+    RECEIVE_TAGS_STATISTICS,
+    SET_FILTER
 } from "./action-types";
 
 const initMeijuList = [];
@@ -213,6 +214,21 @@ function statistics (state = initStatistics, action) {
     }
 }
 
+const initFilter = {
+    type : '',
+    area : '',
+    tags : [],
+    year : ''
+};
+function filter (state = initFilter, action) {
+    switch (action.type) {
+        case SET_FILTER:
+            return Object.assign(state, action.data);
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     meijuList,
     category,
@@ -225,5 +241,6 @@ export default combineReducers({
     commentList,
     commentCount,
     clientIP,
-    statistics
+    statistics,
+    filter
 }); //向外暴露的结构：{meijuList:[], category:{}, count: 0}

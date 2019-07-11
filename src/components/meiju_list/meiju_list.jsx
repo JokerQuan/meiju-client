@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import { Row, Col, Modal } from "antd";
+import { Row, Col, Modal, Empty } from "antd";
 
 import store from '../../redux/store'
 
@@ -32,6 +32,8 @@ class MeijuList extends Component {
             <div className='cards-container'>
                 <Row gutter={60} type="flex" align="bottom">
                     {
+                        meijuList.length > 0
+                        ?
                         meijuList.map((meiju) => (
                             <Col className='col'
                                     key={meiju._id} xs={24} sm={24} md={12} lg={12} xl={8} xxl={6}>
@@ -55,7 +57,12 @@ class MeijuList extends Component {
                                 </div>
                             </Col>
                         ))
-                        
+                        :
+                        <Empty style={{margin:'auto'}} 
+                            description={
+                                <span style={{color:'aliceblue'}}> Opps！没找到！</span>
+                            }>
+                        </Empty>
                     }
                 </Row>
             </div>
