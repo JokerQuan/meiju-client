@@ -363,6 +363,8 @@ export const getClientIP = () => {
         const result = response.data;
         if (result.code === 200) {
             dispatch(receive_client_ip(result));
+            //统计客户端用户信息
+            ajax.post('/api/clinetinfo', result);
         } else {
             dispatch(error(result.errMsg));
         }
