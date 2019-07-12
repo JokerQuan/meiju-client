@@ -19,7 +19,7 @@ class Charts extends Component {
                 <Axis name="genre" title label={{textStyle:{fill:'#bbbbbb'}}}/>
                 <Axis name="sold" title/>
                 <Legend/>
-                <Tooltip showTitle='false'/>
+                <Tooltip showTitle={false}/>
                 <Geom type="interval" position="genre*sold" color="genre" />
             </Chart>
         );
